@@ -1,0 +1,28 @@
+.main {  
+  background-color: $grey-lightblue;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  /* Style buttons */
+  .btn {
+    background-color: $Light-blue;
+    border: none;
+    border-radius: 5px;
+    color: $white;
+    padding: 12px 30px;
+    cursor: pointer;
+    font-size: 20px;
+  }
+
+  /* Darker background on mouse-over */
+  .btn:hover {
+    background-color: $Softred;
+  }
+
+  .form-style{
+  
+    background-color: $grey-darkblue;
+  }
+
+}

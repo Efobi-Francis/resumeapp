@@ -1,0 +1,25 @@
+.navbar{
+    background-color: $Light-blue;
+    box-shadow: 3px 2px 7px rgba(#262631, 0.4);
+    padding-top: 20px;
+    z-index: 1;
+
+    a{
+        color: $white;
+    }
+
+    &-nav{
+        
+        .nav-item{
+            margin-left: 15px;
+            font-size: 1.25rem;
+        }
+
+        .nav-link{
+            margin-bottom: 16px;
+        }
+
+       
+    }
+   
+}

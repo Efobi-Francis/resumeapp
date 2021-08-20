@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>HNG INTERNSHIP | My Resume</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" th:href="@{/dist/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{app/scss/style.css}" />
+  </head>
+
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="#">upgrade your browser</a> to improve your experience.
+      </p>
+    <![endif]-->
+    <nav class="navbar navbar-expand-md">
+      <div class="container-fluid">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">
+          <p class="header-md">Efobi Francis</p>
+        </a>
+
+        <!-- Navbar links -->
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link p-0" href="#contact"><i class="fa fa-fw fa-envelope"></i> Contact</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <section class="container-fluid main">
+      <div class="row p-3">
+        <div class="col-sm-6 text-center my-auto">
+          <h3 class="mb-4 pt-5 h2">Download My Resume</h3>
+          <a th:href="@{/download_resume}" class="btn mb-5"><i class="fa fa-download"></i> Download</a>
+        
+          <div>
+            <h4 class="mb-3">INTERNSHIP SPONSORED BY</h4>
+            <div>
+              <img th:src="@{/images/zuri logo.png}" class="img-fluid img-thumbnail rounded-circle m-2" alt="Zuri Logo"/>
+              <img th:src="@{/images/HNG logo.png}" class="img-fluid img-thumbnail rounded-circle m-2" alt="HNG Logo"/>
+              <img th:src="@{/images/I4G-Logo-Color-Cropped.png}" class="img-fluid img-thumbnail m-2 mt-4" alt="I4G-Logo-Color-Cropped"/>
+            </div>
+          </div>
+        </div>
+
+        <div id="contact" class="col-sm-6 mt-4 pt-5 form-style">
+          <form class="form-horizontal" th:action="@{/index}" th:object="${contactForm}" method="post">
+            <fieldset>
+              <legend class="text-center pb-3">Contact Me</legend>
+              <div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+              <div class="alert alert-primary" role="alert" th:text="${null}" th:if="${null}"></div>
+              <!--Name input-->
+              <div class="form-group">
+                <label class="control-label">Name</label>
+                <input name="name" type="text" placeholder="Your name" class="form-control">
+              </div>
+
+              <!--Email input-->
+              <div class="form-group">
+                <label class="control-label">Your E-mail</label>
+                <input name="emailId" type="email" placeholder="Your email" class="form-control">
+              </div>
+
+              <!--Message body-->
+              <div class="form-group">
+                <label class="control-label">Your Message</label>
+                <textarea class="form-control" name="message" placeholder="Please enter your message here..." rows="5"></textarea>
+              </div>
+
+              <!--Submit button-->
+              <div class="form-group text-right">
+                <button type="submit" class="btn btn-primary btn-lg">submit</button>
+              </div>
+            </fieldset>
+
+          </form>
+        </div>
+
+      </div>
+
+    </section>
+
+    <footer class="text-center h4">
+      <a  href="http://internship.zuri.team">http://internship.zuri.team</a>
+    </footer>
+
+    <script th:src="@{app/js/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{app/js/popper.min.js}"></script>
+    <script th:src="@{app/js/bootstrap.min.js}" async defer></script>
+  </body>
+</html>
