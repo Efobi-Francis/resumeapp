@@ -1,1 +1,5 @@
 com\fobi\myHngi8InternshipProject2\MyHngi8InternshipProject2Application.class
+com\fobi\myHngi8InternshipProject2\controller\IndexController.class
+com\fobi\myHngi8InternshipProject2\model\ContactForm.class
+com\fobi\myHngi8InternshipProject2\entity\User.class
+com\fobi\myHngi8InternshipProject2\repository\UserRepository.class
