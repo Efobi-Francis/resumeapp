@@ -39,7 +39,7 @@ public class IndexController {
 
     @GetMapping(path = "/download_resume")
     public void downloadResume(HttpServletResponse response) throws IOException {
-        File file = new File("C:\\Users\\USER\\Desktop\\myHngi8InternshipProject-2\\src\\main\\resources\\files\\Resume.pdf");
+        File file = new File("src\\main\\resources\\files\\Resume.pdf");
 
         response.setContentType("application/octet-stream");
         String headerKey = "Content-Disposition";
