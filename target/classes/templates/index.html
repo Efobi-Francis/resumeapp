@@ -7,9 +7,10 @@
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Add icon library -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}"/>
     <link rel="stylesheet" th:href="@{/dist/css/bootstrap.min.css}" />
     <link rel="stylesheet" th:href="@{app/scss/style.css}" />
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js}"></script>
   </head>
 
   <body>
@@ -39,7 +40,9 @@
       <div class="row p-3">
         <div class="col-sm-6 text-center my-auto">
           <h3 class="mb-4 pt-5 h2">Download My Resume</h3>
-          <a th:href="@{/download_resume}" class="btn mb-5"><i class="fa fa-download"></i> Download</a>
+          <div th:each="file: ${files}">
+            <a th:href="@{'/file/'+${file.getName()}}" class="btn mb-5"><i class="fa fa-download"></i> <span th:text="${file.getName()}"/></a>
+          </div>
         
           <div>
             <h4 class="mb-3">INTERNSHIP SPONSORED BY</h4>
@@ -91,6 +94,10 @@
     <footer class="text-center h4">
       <a  href="http://internship.zuri.team">http://internship.zuri.team</a>
     </footer>
+
+    <script>
+
+    </script>
 
     <script th:src="@{app/js/jquery-3.6.0.min.js}"></script>
     <script th:src="@{app/js/popper.min.js}"></script>

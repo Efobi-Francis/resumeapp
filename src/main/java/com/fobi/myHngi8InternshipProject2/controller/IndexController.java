@@ -9,18 +9,16 @@ import com.fobi.myHngi8InternshipProject2.entity.User;
 import com.fobi.myHngi8InternshipProject2.model.ContactForm;
 import com.fobi.myHngi8InternshipProject2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 
 /**
  *
@@ -28,6 +26,7 @@ import java.io.IOException;
  */
 @Controller
 public class IndexController {
+    String folderPath = "src/main/resources/files/";
 
     @Autowired
     private UserRepository userRepo;
@@ -37,29 +36,35 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping(path = "/download_resume")
-    public void downloadResume(HttpServletResponse response) throws IOException {
-        File file = new File("src\\main\\resources\\files\\Resume.pdf");
+    @RequestMapping("/")
+    public String downloadFile(Model model) {
+        File folder = new File(folderPath);
+        File[] listOfFiles = folder.listFiles();
+        model.addAttribute("files", listOfFiles);
+        return "index";
+    }
 
-        response.setContentType("application/octet-stream");
-        String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=" + file.getName();
+    @RequestMapping("/file/{fileName}")
+    @ResponseBody
+    public void show(@PathVariable("fileName") String fileName, HttpServletResponse response){
 
-        response.setHeader(headerKey, headerValue);
-
-        ServletOutputStream outputStream = response.getOutputStream();
-
-        BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(file));
-
-        byte[] buffer = new byte[8192]; //8kb buffer
-        int bytesRead = -1;
-
-        while ((bytesRead = inputStream.read(buffer)) != -1){
-            outputStream.write(buffer, 0, bytesRead);
+        if(fileName.indexOf(".pdf")>-1) response.setContentType("application/pdf");
+        response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+        response.setHeader("content-Transfer-Encoding", "binary");
+        try {
+            BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream());
+            FileInputStream fis = new FileInputStream(folderPath+fileName);
+            int len;
+            byte[] buf = new byte[1024];
+            while ((len = fis.read(buf))>0) {
+                bos.write(buf,0,len);
+            }
+            bos.close();
+            response.flushBuffer();
         }
-
-        inputStream.close();
-        outputStream.close();
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     // method to submit form
